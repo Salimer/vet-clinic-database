@@ -25,3 +25,6 @@ vet_clinic(#   WEIGHT_KG DECIMAL(3, 2) NOT NULL
 vet_clinic(# );
 CREATE TABLE                                                                                                                                              CREATE TABLE
 
+vet_clinic=# ALTER TABLE animals
+vet_clinic-# ADD COLUMN species VARCHAR;
+ALTER TABLE
