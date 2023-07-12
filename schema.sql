@@ -23,8 +23,45 @@ vet_clinic(#   ESCAPE_ATTEMPTS INT NOT NULL,
 vet_clinic(#   NEUTERED BOOL NOT NULL,
 vet_clinic(#   WEIGHT_KG DECIMAL(3, 2) NOT NULL
 vet_clinic(# );
-CREATE TABLE                                                                                                                                              CREATE TABLE
+CREATE TABLE
 
 vet_clinic=# ALTER TABLE animals
 vet_clinic-# ADD COLUMN species VARCHAR;
+ALTER TABLE
+
+vet_clinic=# CREATE TABLE owners(
+vet_clinic(# id SERIAL PRIMARY KEY,
+vet_clinic(# full_name VARCHAR(255),
+vet_clinic(# age INT 
+vet_clinic(# );
+CREATE TABLE
+
+vet_clinic=# CREATE TABLE species(
+vet_clinic(# id SERIAL PRIMARY KEY,
+vet_clinic(# name VARCHAR(255)
+vet_clinic(# );
+CREATE TABLE
+
+vet_clinic=# ALTER TABLE animals
+vet_clinic-# DROP COLUMN species;
+ALTER TABLE
+
+vet_clinic=# ALTER TABLE animals
+ADD COLUMN species_id INT;
+ALTER TABLE
+
+vet_clinic=# ALTER TABLE animals
+ADD CONSTRAINT add_fk  
+FOREIGN KEY(species_id)
+REFERENCES species(id);
+ALTER TABLE
+
+vet_clinic=# ALTER TABLE animals
+vet_clinic-# ADD COLUMN owner_id INT;
+ALTER TABLE
+
+vet_clinic=# ALTER TABLE animals                                                                                                              
+ADD CONSTRAINT add_owners_fk                                                                                                                  
+FOREIGN KEY(owner_id)                                                                                                                         
+REFERENCES owners(id);
 ALTER TABLE
