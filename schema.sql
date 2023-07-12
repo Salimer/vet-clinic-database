@@ -28,3 +28,20 @@ CREATE TABLE                                                                    
 vet_clinic=# ALTER TABLE animals
 vet_clinic-# ADD COLUMN species VARCHAR;
 ALTER TABLE
+
+vet_clinic=# CREATE TABLE owners(
+vet_clinic(# id SERIAL PRIMARY KEY,
+vet_clinic(# full_name VARCHAR(255),
+vet_clinic(# age INT 
+vet_clinic(# );
+CREATE TABLE
+vet_clinic=# CREATE TABLE species(
+vet_clinic(# id SERIAL PRIMARY KEY,
+vet_clinic(# name VARCHAR(255)
+vet_clinic(# );
+CREATE TABLE
+
+vet_clinic=# ALTER TABLE animals
+vet_clinic-# DROP COLUMN species;
+ALTER TABLE
+ALTER TABLE
