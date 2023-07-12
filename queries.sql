@@ -245,3 +245,90 @@ vet_clinic-# GROUP BY species;
 ---------+-------------------------
  pokemon |      3.0000000000000000
 (1 row)
+
+*****************************************************************************************************************************
+
+-- What animals belong to Melody Pond?
+vet_clinic=# SELECT full_name as owner, name as animal
+FROM animals
+INNER JOIN owners 
+ON animals.owner_id = owners.id
+WHERE owners.id = 4;
+    owner    |   animal   
+-------------+------------
+ Melody Pond | Blossom
+ Melody Pond | Charmander
+ Melody Pond | Squirtle
+(3 rows)
+
+-- List of all animals that are pokemon (their type is Pokemon).
+vet_clinic=# SELECT animals.name as animal, species.name as species                                                                           FROM animals                                                                                                                                  INNER JOIN species                                                                                                                            ON animals.species_id = species.id                                                                                                            WHERE species.id = 1;
+   animal   | species 
+------------+---------
+ Pikachu    | Pokemon
+ Blossom    | Pokemon
+ Charmander | Pokemon
+ Squirtle   | Pokemon
+(4 rows)
+
+-- List all owners and their animals, remember to include those that don't own any animal.
+vet_clinic=# SELECT full_name as owner, name as animal                                                                                        FROM animals                                                                                                                                  RIGHT JOIN owners                                                                                                                             ON animals.owner_id = owners.id;
+      owner      |   animal   
+-----------------+------------
+ Sam Smith       | Agumon
+ Jennifer Orwell | Pikachu
+ Jennifer Orwell | Gabumon
+ Bob             | Devimon
+ Bob             | Plantmon
+ Melody Pond     | Blossom
+ Melody Pond     | Charmander
+ Melody Pond     | Squirtle
+ Dean Winchester | Boarmon
+ Dean Winchester | Angemon
+ Jodie Whittaker | 
+(11 rows)
+
+-- How many animals are there per species?
+vet_clinic=# SELECT s.name AS species_name, COUNT(*) AS animal_count
+vet_clinic-# FROM animals a
+vet_clinic-# JOIN species s ON a.species_id = s.id
+vet_clinic-# GROUP BY s.name;
+ species_name | animal_count 
+--------------+--------------
+ Pokemon      |            4
+ Digimon      |            6
+(2 rows)
+
+-- List all Digimon owned by Jennifer Orwell.
+vet_clinic=# SELECT a.name
+vet_clinic-# FROM animals a
+vet_clinic-# JOIN owners o ON a.owner_id = o.id
+vet_clinic-# JOIN species s ON a.species_id = s.id
+vet_clinic-# WHERE o.full_name = 'Jennifer Orwell' AND s.name = 'Digimon';
+  name   
+---------
+ Gabumon
+(1 row)
+
+-- List all animals owned by Dean Winchester that haven't tried to escape.
+vet_clinic=# SELECT name as animal  
+FROM animals     
+JOIN owners
+ON animals.owner_id = owners.id
+WHERE animals.escape_attempts = 0 AND owners.full_name = 'Dean Winchester';
+ animal 
+--------
+(0 rows)
+
+-- Who owns the most animals?
+vet_clinic=# SELECT o.full_name as owner, COUNT(*) as total_animals
+FROM animals a    
+JOIN owners o         
+ON a.owner_id = o.id
+GROUP BY owner
+ORDER BY total_animals DESC
+LIMIT 1;
+    owner    | total_animals 
+-------------+---------------
+ Melody Pond |             3
+(1 row)
