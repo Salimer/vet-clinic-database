@@ -262,7 +262,11 @@ WHERE owners.id = 4;
 (3 rows)
 
 -- List of all animals that are pokemon (their type is Pokemon).
-vet_clinic=# SELECT animals.name as animal, species.name as species                                                                           FROM animals                                                                                                                                  INNER JOIN species                                                                                                                            ON animals.species_id = species.id                                                                                                            WHERE species.id = 1;
+vet_clinic=# SELECT animals.name as animal, species.name as species
+FROM animals
+INNER JOIN species  
+ON animals.species_id = species.id
+WHERE species.id = 1;
    animal   | species 
 ------------+---------
  Pikachu    | Pokemon
@@ -272,7 +276,10 @@ vet_clinic=# SELECT animals.name as animal, species.name as species             
 (4 rows)
 
 -- List all owners and their animals, remember to include those that don't own any animal.
-vet_clinic=# SELECT full_name as owner, name as animal                                                                                        FROM animals                                                                                                                                  RIGHT JOIN owners                                                                                                                             ON animals.owner_id = owners.id;
+vet_clinic=# SELECT full_name as owner, name as animal
+FROM animals
+RIGHT JOIN owners
+ON animals.owner_id = owners.id;
       owner      |   animal   
 -----------------+------------
  Sam Smith       | Agumon
@@ -289,10 +296,10 @@ vet_clinic=# SELECT full_name as owner, name as animal                          
 (11 rows)
 
 -- How many animals are there per species?
-vet_clinic=# SELECT s.name AS species_name, COUNT(*) AS animal_count
-vet_clinic-# FROM animals a
-vet_clinic-# JOIN species s ON a.species_id = s.id
-vet_clinic-# GROUP BY s.name;
+ SELECT s.name AS species_name, COUNT(*) AS animal_count
+ FROM animals a
+ JOIN species s ON a.species_id = s.id
+ GROUP BY s.name;
  species_name | animal_count 
 --------------+--------------
  Pokemon      |            4
@@ -300,11 +307,11 @@ vet_clinic-# GROUP BY s.name;
 (2 rows)
 
 -- List all Digimon owned by Jennifer Orwell.
-vet_clinic=# SELECT a.name
-vet_clinic-# FROM animals a
-vet_clinic-# JOIN owners o ON a.owner_id = o.id
-vet_clinic-# JOIN species s ON a.species_id = s.id
-vet_clinic-# WHERE o.full_name = 'Jennifer Orwell' AND s.name = 'Digimon';
+SELECT a.name
+ FROM animals a
+ JOIN owners o ON a.owner_id = o.id
+ JOIN species s ON a.species_id = s.id
+ WHERE o.full_name = 'Jennifer Orwell' AND s.name = 'Digimon';
   name   
 ---------
  Gabumon
