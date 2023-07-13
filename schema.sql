@@ -65,3 +65,28 @@ ADD CONSTRAINT add_owners_fk
 FOREIGN KEY(owner_id)                                                                                                                         
 REFERENCES owners(id);
 ALTER TABLE
+
+vet_clinic=# CREATE TABLE vets(                                                                                          
+        id SERIAL PRIMARY KEY,                                                                                                   
+        name VARCHAR,                                                                                                            
+        age INT,                                                                                                                 
+        date_of_graduation DATE                                                                                                  
+        );
+CREATE TABLE
+
+vet_clinic=# CREATE TABLE specializations(
+vet_clinic(# species_id INT REFERENCES species(id),
+vet_clinic(# vet_id INT REFERENCES vets(id),
+vet_clinic(# PRIMARY KEY(species_id, vet_id)
+vet_clinic(# );
+CREATE TABLE
+
+vet_clinic=# CREATE TABLE visits(
+vet_clinic(# animal_id INT REFERENCES animals(id),
+vet_clinic(# vet_id INT REFERENCES vets(id),
+vet_clinic(# PRIMARY KEY(animal_id, vet_id));
+CREATE TABLE
+
+vet_clinic=# ALTER TABLE visits
+vet_clinic-# ADD COLUMN visit_date DATE;
+ALTER TABLE
