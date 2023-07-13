@@ -339,3 +339,116 @@ LIMIT 1;
 -------------+---------------
  Melody Pond |             3
 (1 row)
+*****************************************************************************************************************************
+
+-- Who was the last animal seen by William Tatcher?
+vet_clinic=# SELECT a.name                                                                                                                                 
+FROM animals a                                                                                                                                             
+JOIN visits v ON a.id = v.animal_id                                                                                                                        
+JOIN vets vt ON v.vet_id = vt.id                                                                                                                           
+WHERE vt.name = 'William Tatcher'                                                                                                                          
+ORDER BY visit_date DESC                                                                                                                                   
+LIMIT 1;
+  name   
+---------
+ Blossom
+(1 row)
+
+-- ow many different animals did Stephanie Mendez see?
+vet_clinic=# SELECT COUNT(a.name)                      
+FROM animals a                                         
+JOIN visits v ON a.id = v.animal_id                    
+JOIN vets vt ON vt.id = v.vet_id                       
+WHERE vt.name = 'Stephanie Mendez';
+ count 
+-------
+     4
+(1 row)
+
+-- List all vets and their specialties, including vets with no specialties.
+vet_clinic=# SELECT v.name, s.name AS specialty
+vet_clinic-# FROM vets v
+vet_clinic-# LEFT JOIN specializations sp ON v.id = sp.vet_id
+vet_clinic-# LEFT JOIN species s ON sp.species_id = s.id;
+       name       | specialty 
+------------------+-----------
+ William Tatcher  | Pokemon
+ Stephanie Mendez | Pokemon
+ Stephanie Mendez | Digimon
+ Jack Harkness    | Digimon
+ Maisy Smith      | 
+(5 rows)
+
+-- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+vet_clinic=# SELECT a.name
+vet_clinic-# FROM animals a
+vet_clinic-# JOIN visits v ON v.animal_id = a.id
+vet_clinic-# JOIN vets vt ON vt.id = v.vet_id
+vet_clinic-# WHERE vt.name = 'Stephanie Mendez' AND 
+vet_clinic-# v.visit_date BETWEEN '2020-04-1' AND '2020-08-30';
+  name   
+---------
+ Agumon
+ Blossom
+(2 rows)
+
+-- What animal has the most visits to vets?
+vet_clinic=# SELECT a.name, COUNT(v.animal_id) as visits       
+FROM animals a                                                 
+JOIN visits v ON v.animal_id = a.id                            
+GROUP BY a.name                                                
+ORDER BY visits DESC                                           
+LIMIT 1;
+  name   | visits 
+---------+--------
+ Boarmon |      4
+(1 row)
+
+-- Who was Maisy Smith's first visit?
+vet_clinic=# SELECT a.name AS Animal, v.visit_date             
+FROM visits v                                                  
+JOIN vets vt ON v.vet_id = vt.id                               
+JOIN animals a ON v.animal_id = a.id                           
+WHERE vt.name = 'Maisy Smith'                                  
+ORDER BY v.visit_date ASC                                      
+LIMIT 1;
+ animal  | visit_date 
+---------+------------
+ Boarmon | 2019-01-24
+(1 row)
+
+-- Details for most recent visit: animal information, vet information, and date of visit.
+
+vet_clinic=# vet_clinic=# SELECT a.name AS animal_name, vt.name AS vet_name, v.visit_date   FROM visits v                                                                               JOIN vets vt ON v.vet_id = vt.id                                                            JOIN animals a ON v.animal_id = a.id                                                        ORDER BY v.visit_date DESC                                                                  LIMIT 1;
+ animal_name |     vet_name     | visit_date 
+-------------+------------------+------------
+ Devimon     | Stephanie Mendez | 2021-05-04
+(1 row)
+
+-- How many visits were with a vet that did not specialize in that animal's species?
+vet_clinic=# SELECT COUNT(*)
+vet_clinic-# FROM visits v
+vet_clinic-# JOIN vets vt ON v.vet_id = vt.id
+vet_clinic-# JOIN animals a ON v.animal_id = a.id
+vet_clinic-# LEFT JOIN specializations sp ON vt.id = sp.vet_id AND a.species_id = sp.species_id
+vet_clinic-# WHERE sp.vet_id IS NULL;
+ count 
+-------
+    12
+(1 row)
+
+
+-- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
+vet_clinic=# SELECT s.name AS specialty, COUNT(*) AS visit_count
+vet_clinic-# FROM visits v
+vet_clinic-# JOIN vets vt ON v.vet_id = vt.id
+vet_clinic-# JOIN animals a ON v.animal_id = a.id
+vet_clinic-# JOIN species s ON a.species_id = s.id
+vet_clinic-# WHERE vt.name = 'Maisy Smith'
+vet_clinic-# GROUP BY s.name
+vet_clinic-# ORDER BY visit_count DESC
+vet_clinic-# LIMIT 1;
+ specialty | visit_count 
+-----------+-------------
+ Digimon   |           6
+(1 row)
