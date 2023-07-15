@@ -419,7 +419,12 @@ LIMIT 1;
 
 -- Details for most recent visit: animal information, vet information, and date of visit.
 
-vet_clinic=# vet_clinic=# SELECT a.name AS animal_name, vt.name AS vet_name, v.visit_date   FROM visits v                                                                               JOIN vets vt ON v.vet_id = vt.id                                                            JOIN animals a ON v.animal_id = a.id                                                        ORDER BY v.visit_date DESC                                                                  LIMIT 1;
+vet_clinic=# vet_clinic=# SELECT a.name AS animal_name, vt.name AS vet_name, v.visit_date   
+FROM visits v                                                                               
+JOIN vets vt ON v.vet_id = vt.id                                                            
+JOIN animals a ON v.animal_id = a.id                                                        
+ORDER BY v.visit_date DESC                                                                  
+LIMIT 1;
  animal_name |     vet_name     | visit_date 
 -------------+------------------+------------
  Devimon     | Stephanie Mendez | 2021-05-04
