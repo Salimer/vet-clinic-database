@@ -93,3 +93,6 @@ ALTER TABLE
 
 vet_clinic=# CREATE INDEX idx_animal_id ON visits (animal_id);
 CREATE INDEX
+
+vet_clinic=# CREATE INDEX idx ON owners (id);
+CREATE INDEX
