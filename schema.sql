@@ -90,3 +90,6 @@ CREATE TABLE
 vet_clinic=# ALTER TABLE visits
 vet_clinic-# ADD COLUMN visit_date DATE;
 ALTER TABLE
+
+vet_clinic=# CREATE INDEX idx_animal_id ON visits (animal_id);
+CREATE INDEX
