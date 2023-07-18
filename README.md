@@ -105,6 +105,18 @@ No tests here...
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/sbamahfoodh)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+> Describe 1 - 3 features you will add to the project.
+
+- [Full-Text Search Integration] **[new_feature_1]**
+- [Data Partitioning] **[new_feature_2]**
+- [Security Enhancements] **[new_feature_3]**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- CONTRIBUTING -->
 
 ## 🤝 Contributing <a name="contributing"></a>
