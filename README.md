@@ -13,6 +13,7 @@
     - [Run tests](#run-tests)
   - [👥 Authors ](#-authors-)
     - [Author:](#author)
+  - [🔭 Future Features](#future-features)
   - [🤝 Contributing ](#-contributing-)
   - [👋 Show your support ](#-show-your-support-)
   - [🔭Acknowledgments ](#acknowledgments-)
