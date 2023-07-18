@@ -91,6 +91,8 @@ vet_clinic=# ALTER TABLE visits
 vet_clinic-# ADD COLUMN visit_date DATE;
 ALTER TABLE
 
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
 CREATE INDEX idx_animal_id ON visits (animal_id);
 CREATE INDEX idx_visits_vet_id ON visits (vet_id);
 CREATE INDEX idx ON owners (id);
