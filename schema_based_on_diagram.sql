@@ -24,6 +24,7 @@ CREATE TABLE treatments(
     type VARCHAR,
     name VARCHAR
 );
+
 CREATE TABLE invoice_items(
     id SERIAL PRIMARY KEY,
     unit_price DECIMAL(10, 2),
@@ -32,6 +33,7 @@ CREATE TABLE invoice_items(
     invoice_id INT REFERENCES invoices(id),
     treatment_id INT REFERENCES treatments(id)
 );
+
 CREATE TABLE treatments_histories(
     medical_histories_id INT REFERENCES medical_histories(id),
     treatments_id INT REFERENCES treatments(id),
