@@ -109,8 +109,6 @@ No tests here...
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
-
 - [Full-Text Search Integration] **[new_feature_1]**
 - [Data Partitioning] **[new_feature_2]**
 - [Security Enhancements] **[new_feature_3]**
